@@ -234,9 +234,9 @@ a:hover {
 }
 
 .title-icon {
-    font-size: 3.5rem;
     display: inline-block;
     animation: pulse 2s ease-in-out infinite;
+    /* Size controlled via inline style in HTML */
 }
 
 @keyframes pulse {
