@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Best-of-N Jailbreaking">
+
+  <title>Best-of-N Jailbreaking</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+  <link rel="stylesheet" href="css/app.css">
+
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <script src="js/app.js"></script>
+
+  <style>
+    .nav-pills {
+      position: relative;
+      display: inline;
+    }
+    .imtip {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" id="main">
+    <!-- Title -->
+    <header class="row">
+      <h2 class="col-md-12 text-center">
+        <b>
+          <font size="+6">Best-of-N Jailbreaking</font>
+        </b>
+      </h2>
+    </header>
+
+    <!-- Authors -->
+    <section class="row">
+      <div class="col-md-12 text-center">
+        <!-- First row authors -->
+        <ul class="list-inline">
+          <li><a href="https://www.jplhughes.com/" target="_blank" style="color: inherit;">John Hughes</a>*</li>
+          <li><a href="https://www.linkedin.com/in/sara-price-310757b2/" target="_blank" style="color: inherit;">Sara Price</a>*</li>
+          <li><a href="https://aengusl.github.io/aenguslynch.github.io/" target="_blank" style="color: inherit;">Aengus Lynch</a>*</li>
+        </ul>
+        <!-- Second row authors -->
+        <ul class="list-inline">
+          <li><a href="https://rylanschaeffer.github.io/" target="_blank" style="color: inherit;">Rylan Schaeffer</a></li>
+          <li><a href="https://fbarez.github.io/" target="_blank" style="color: inherit;">Fazl Barez</a></li>
+          <li><a href="https://cs.stanford.edu/~sanmi/" target="_blank" style="color: inherit;">Sanmi Koyejo</a></li>
+          <li><a href="https://www.linkedin.com/in/henry-sleight-406811227" target="_blank" style="color: inherit;">Henry Sleight</a></li>
+          <li><a href="https://people.eecs.berkeley.edu/~erjones" target="_blank" style="color: inherit;">Erik Jones</a></li>
+        </ul>
+        <!-- Third row authors -->
+        <ul class="list-inline">
+          <li><a href="https://ethanperez.net/" target="_blank" style="color: inherit;">Ethan Perez</a></li>
+          <li><a href="https://www.mrinanksharma.net/" target="_blank" style="color: inherit;">Mrinank Sharma</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Links -->
+    <section class="row">
+      <div class="col-md-8 col-md-offset-2 text-center">
+        <h3>
+          <a href="https://arxiv.org/abs/2412.03556" target="_blank">Paper</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="https://github.com/McHughes288/bon_jailbreaking" target="_blank">Code</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="#examples" onclick="document.getElementById('widget-container').scrollIntoView();">Examples</a>
+        </h3>
+      </div>
+    </section>
+
+    <!-- Abstract -->
+    <section class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h3>Abstract</h3>
+        <p class="text-justify">
+          We introduce Best-of-N (BoN) Jailbreaking, a simple black-box algorithm that jailbreaks frontier AI systems across modalities. BoN Jailbreaking works by repeatedly sampling variations of a prompt with a combination of augmentations - such as random shuffling or capitalization for textual prompts - until a harmful response is elicited. We find that BoN Jailbreaking achieves high attack success rates (ASRs) on closed-source language models, such as 89% on GPT-4o and 78% on Claude 3.5 Sonnet when sampling 10,000 augmented prompts. Further, it is similarly effective at circumventing state-of-the-art open-source defenses like circuit breakers. BoN also seamlessly extends to other modalities: it jailbreaks vision language models (VLMs) such as GPT-4o and audio language models (ALMs) like Gemini 1.5 Pro, using modality-specific augmentations. BoN reliably improves when we sample more augmented prompts. Across all modalities, ASR, as a function of the number of samples (N), empirically follows power-law-like behavior for many orders of magnitude. BoN Jailbreaking can also be composed with other black-box algorithms for even more effective attacks - combining BoN with an optimized prefix attack achieves up to a 35% increase in ASR. Overall, our work indicates that, despite their capability, language models are sensitive to seemingly innocuous changes to inputs, which attackers can exploit across modalities.
+        </p>
+      </div>
+    </section>
+
+    <!-- Overview Figure -->
+    <section class="col-md-12 text-center" style="margin-top: 20px;">
+      <img src="assets/intro_figure.png" style="width: 70%; height: auto;" class="img-responsive" alt="Overview figure">
+    </section>
+
+    <!-- Figure Caption -->
+    <section class="col-md-8 col-md-offset-2" style="color: rgb(83, 83, 83); margin-top: 10px;">
+      <p>
+        <strong>Overview of BoN jailbreaking, the performance across three input modalities and its scaling behavior.</strong> <strong>(top)</strong> BoN jailbreaking is run on each request by applying randomly sampled augmentations, processing the transformed request with the LLM, and grading the response for harmfulness. <strong>(a)</strong> ASR of BoN jailbreaking on the different LLMs as a function of the number of augmented sample attacks (N), with error bars produced via bootstrapping. Across all LLMs, text BoN achieves at least a 52% ASR after 10,000 sampled attacks, highlighting the effectiveness of BoN jailbreaking. <strong>(b, c)</strong> BoN seamlessly extends to vision and audio inputs by using modality-specific augmentations. <strong>(d)</strong> We show the text modality scaling behavior of the negative log ASR with respect to N for Claude 3.5 Sonnet, suggesting power-law-like behavior.
+      </p>
+    </section>
+
+    <!-- Spacing -->
+    <section class="col-md-12" style="margin-top: 30px;"></section>
+
+    <!-- Examples Widget -->
+    <section id="widget-container" class="col-md-8 col-md-offset-2" style="padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #f9f9f9;">
+      <h3 class="text-center" style="margin-bottom: 20px; font-weight: 600;">Example Jailbreaks</h3>
+      <p class="text-center" style="color: red; margin-bottom: 20px;">WARNING: EXAMPLES CONTAIN HARMFUL CONTENT</p>
+
+      <!-- Modality Tabs -->
+      <ul class="nav nav-tabs nav-justified" style="margin-bottom: 20px;">
+        <li class="active"><a href="#text" data-toggle="tab">Text</a></li>
+        <li><a href="#vision" data-toggle="tab">Vision</a></li>
+        <li><a href="#audio" data-toggle="tab">Audio</a></li>
+      </ul>
+
+      <!-- Filters -->
+      <p style="font-size: 0.9em; color: #888; margin-bottom: 15px;">
+        By default, all jailbreak examples across models and behaviors are shown. Use the dropdowns below to filter the results. You can choose to show responses from a specific model, or see how different models respond to a particular HarmBench behavior. Navigate between examples using the Previous/Next buttons, or jump directly to a specific example by entering its number and clicking Go. The current example number and total count based on your filters are shown on the right.
+      </p>
+      <div class="form-group" style="display: inline-block; width: 48%; margin-right: 2%;">
+        <label for="model-filter" style="font-weight: 500;">Filter by model:</label>
+        <select id="model-filter" class="form-control">
+          <option value="">All Models</option>
+        </select>
+      </div>
+      <div class="form-group" style="display: inline-block; width: 48%;">
+        <label for="behavior-filter" style="font-weight: 500;">Filter by behavior_id:</label>
+        <select id="behavior-filter" class="form-control">
+          <option value="">All Behaviors</option>
+        </select>
+      </div>
+
+      <!-- Navigation -->
+      <div class="text-center" style="margin-top: 20px;">
+        <button id="prev-entry" class="btn btn-outline-primary" style="margin-right: 10px;">Previous</button>
+        <button id="next-entry" class="btn btn-outline-primary" style="margin-right: 10px;">Next</button>
+        <label for="entry-seek" style="font-weight: 500; margin-right: 10px;">Go to entry:</label>
+        <input type="number" id="entry-seek" class="form-control" style="display: inline-block; width: auto; margin-right: 10px;" min="1">
+        <button id="seek-entry" class="btn btn-outline-primary">Go</button>
+        <p id="entry-info" style="font-weight: 500; margin-left: 20px; display: inline-block;"></p>
+      </div>
+      <div id="entries-container" style="margin-top: 20px;"></div>
+    </section>
+
+    <!-- Citation -->
+    <section class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h3>Citation</h3>
+        <div class="form-group col-md-10 col-md-offset-1">
+          <textarea id="bibtex" class="form-control" readonly>
+@article{hughes2024bestofnjailbreaking,
+  title={Best-of-N Jailbreaking},
+  author={John Hughes and Sara Price and Aengus Lynch and Rylan Schaeffer and Fazl Barez and Sanmi Koyejo and Henry Sleight and Erik Jones and Ethan Perez and Mrinank Sharma},
+  journal={arXiv preprint arXiv:2412.03556},
+  year={2024}
+}</textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <p class="text-justify">
+          This site's design is adapted from <a href="https://forbiddenfacts.github.io/" target="_blank">forbiddenfacts</a>.
+        </p>
+      </div>
+    </footer>
+  </div>
+
+</body>
+</html>
