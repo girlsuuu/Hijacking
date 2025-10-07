@@ -2,3 +2,5 @@ __pycache__/
 wandb/
 attack_log/
 CLAUDE.md
+/docs/assets/Hijacking_paper.pdf
+/docs/assets/Hijacking_paper.tex
