@@ -34,7 +34,6 @@
           <li><a href="#results" class="nav-link">Results</a></li>
           <li><a href="#methodology" class="nav-link">Method</a></li>
           <li><a href="#analysis" class="nav-link">Analysis</a></li>
-          <li><a href="#authors" class="nav-link">Authors</a></li>
           <li><a href="#citation" class="nav-link">Citation</a></li>
         </ul>
         <button class="nav-toggle" id="nav-toggle">
@@ -48,9 +47,9 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
       <div class="hero-background"></div>
-      <div class="container hero-content">
+      <div class="container hero-content" style="margin-top: -3rem;">
         <div class="hero-badge">Preprint</div>
-        <h1 class="hero-title">
+        <h1 class="hero-title" style="margin-top: 1rem; margin-bottom: 2rem;">
           Chain-of-Thought Hijacking
           <img
             src="assets/Jailbreak_Icon_Color.png"
@@ -84,6 +83,32 @@
           >
             💻 GitHub Code
           </a>
+        </div>
+
+        <!-- Authors on Hero Page -->
+        <div class="hero-authors" style="margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); max-width: 95%; margin-left: auto; margin-right: auto;">
+          <div style="display: flex; justify-content: center; gap: 50px; margin: 0 auto;">
+            <div style="text-align: center;">
+              <div style="font-size: 1.05rem; font-weight: 500; margin-bottom: 6px; white-space: nowrap;">Jianli Zhao</div>
+              <div style="font-size: 0.9rem; opacity: 0.8; white-space: nowrap;">Independent</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: 1.05rem; font-weight: 500; margin-bottom: 6px; white-space: nowrap;">Tingchen Fu</div>
+              <div style="font-size: 0.9rem; opacity: 0.8; white-space: nowrap;">Renmin University of China</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: 1.05rem; font-weight: 500; margin-bottom: 6px; white-space: nowrap;">Rylan Schaeffer</div>
+              <div style="font-size: 0.9rem; opacity: 0.8; white-space: nowrap;">Stanford University</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: 1.05rem; font-weight: 500; margin-bottom: 6px; white-space: nowrap;">Mrinank Sharma</div>
+              <div style="font-size: 0.9rem; opacity: 0.8; white-space: nowrap;">Anthropic</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: 1.05rem; font-weight: 500; margin-bottom: 6px; white-space: nowrap;">Fazl Barez</div>
+              <div style="font-size: 0.9rem; opacity: 0.8; white-space: nowrap;">University of Oxford · WhiteBox · Martian</div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="scroll-indicator">
@@ -143,37 +168,6 @@
           frontier reasoning models, comparing against state-of-the-art baseline
           jailbreak methods
         </p>
-
-        <!-- GPT-5 Experimental Results -->
-        <div style="margin-top: 60px">
-          <h3 style="text-align: center; margin-bottom: 30px; font-size: 1.5rem;">
-            Attack GPT-5 Mini with Different Reasoning Effort
-          </h3>
-          <div class="results-table-wrapper" style="max-width: 750px; margin: 0 auto;">
-            <table class="results-table" style="font-size: 1.1rem;">
-              <thead>
-                <tr>
-                  <th style="padding: 20px 40px; font-size: 1.2rem;">Minimal</th>
-                  <th style="padding: 20px 40px; font-size: 1.2rem;">Low</th>
-                  <th style="padding: 20px 40px; font-size: 1.2rem;">High</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="padding: 25px 40px; font-size: 1.3rem;"><strong>72%</strong></td>
-                  <td class="highlight-col" style="padding: 25px 40px; font-size: 1.3rem;"><strong>76%</strong></td>
-                  <td style="padding: 25px 40px; font-size: 1.3rem;"><strong>68%</strong></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p
-            class="section-description"
-            style="margin-top: 25px; text-align: center; font-style: italic; font-size: 1.05rem;"
-          >
-            Attack success is highest under low reasoning effort, suggesting reasoning-effort and CoT length are related but distinct controls
-          </p>
-        </div>
       </div>
     </section>
 
@@ -229,37 +223,6 @@
           attention heads.
         </p>
 
-        <!-- Refusal Direction -->
-        <div class="analysis-subsection">
-          <h3>Refusal Direction in Reasoning Models</h3>
-          <p>
-            Following prior work, we identified a single activation-space
-            direction that governs refusal behavior on <em>large reasoning models</em>. By ablating this direction
-            on harmful prompts, we increase attack success from
-            <strong>11% to 91%</strong>. Conversely, adding it to harmless
-            prompts causes over-refusal, dropping success from
-            <strong>94% to 1%</strong>.
-          </p>
-          <div class="intervention-grid">
-            <div class="intervention-card">
-              <h4>Harmful Instructions</h4>
-              <div class="intervention-result">
-                <span class="before">Baseline: 11%</span>
-                <span class="arrow">→</span>
-                <span class="after success">Ablation: 91%</span>
-              </div>
-            </div>
-            <div class="intervention-card">
-              <h4>Harmless Instructions</h4>
-              <div class="intervention-result">
-                <span class="before">Baseline: 94%</span>
-                <span class="arrow">→</span>
-                <span class="after danger">Addition: 1%</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- Attention Analysis -->
         <div class="analysis-subsection" style="margin-top: 50px">
           <h3>Attention Pattern Analysis</h3>
@@ -288,63 +251,6 @@
               <p class="figure-caption">
                 <strong>Figure 4: Attention Ratio vs CoT Length.</strong>
                 Longer CoT reduces attention to harmful instructions.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Causal Interventions -->
-        <div class="analysis-subsection" style="margin-top: 50px">
-          <h3>Causal Intervention: Attention Head Ablation</h3>
-          <p>
-            We ablated 6 specific attention heads that showed 'longer CoT, lower ratio'.
-            This targeted intervention proved causal: refusal signals flattened, leading to compliance with harmful requests.
-          </p>
-          <div class="figures-grid">
-            <div class="figure-item">
-              <img
-                src="assets/6_baseline_vs_predefined_ablation_1k_1.png"
-                alt="Targeted Ablation"
-                class="analysis-img"
-              />
-              <p class="figure-caption">
-                <strong>Figure 5: Targeted Head Ablation.</strong>
-                Ablating selected heads has strong effect.
-              </p>
-            </div>
-            <div class="figure-item">
-              <img
-                src="assets/6_baseline_vs_random_ablation_1k_1.png"
-                alt="Random Ablation"
-                class="analysis-img"
-              />
-              <p class="figure-caption">
-                <strong>Figure 6: Random Head Ablation.</strong>
-                Random ablation shows weaker effect.
-              </p>
-            </div>
-          </div>
-          <div class="figures-grid" style="margin-top: 30px">
-            <div class="figure-item">
-              <img
-                src="assets/6front_baseline_vs_predefined_ablation_1k_1.png"
-                alt="Front Layers"
-                class="analysis-img"
-              />
-              <p class="figure-caption">
-                <strong>Figure 7: Front-layer Heads (15-23).</strong>
-                Early layers play a stronger role.
-              </p>
-            </div>
-            <div class="figure-item">
-              <img
-                src="assets/6deep_baseline_vs_predefined_ablation_1k_1.png"
-                alt="Deep Layers"
-                class="analysis-img"
-              />
-              <p class="figure-caption">
-                <strong>Figure 8: Deep-layer Heads (23-35).</strong>
-                Later layers have weaker impact.
               </p>
             </div>
           </div>
@@ -380,38 +286,6 @@
       </div>
     </section>
 
-    <!-- Authors -->
-    <section id="authors" class="section">
-      <div class="container">
-        <h2 class="section-title">Authors</h2>
-        <div class="authors-grid">
-          <div class="author-card">
-            <div class="author-name">Jianli Zhao</div>
-            <div class="author-affiliation">Independent</div>
-          </div>
-          <div class="author-card">
-            <div class="author-name">Tingchen Fu</div>
-            <div class="author-affiliation">Renmin University of China</div>
-          </div>
-          <div class="author-card">
-            <div class="author-name">Rylan Schaeffer</div>
-            <div class="author-affiliation">Stanford University</div>
-          </div>
-          <div class="author-card">
-            <div class="author-name">Mrinank Sharma</div>
-            <div class="author-affiliation">Anthropic</div>
-          </div>
-          <div class="author-card">
-            <div class="author-name">Fazl Barez</div>
-            <div class="author-affiliation">
-              University of Oxford · WhiteBox · Martian
-            </div>
-            <div class="author-note">Corresponding author</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Citation -->
     <section id="citation" class="section section-alt">
       <div class="container">
@@ -419,45 +293,12 @@
         <div class="citation-box">
           <pre id="bibtex-content">
 @article{To be arxived...
+  ...
+  ...
+  ...
 }</pre
           >
           <button class="btn-copy" id="copy-bibtex">📋 Copy BibTeX</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Resources -->
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">Resources</h2>
-        <div class="resources-grid">
-          <a
-            href="assets/Hijacking_paper.pdf"
-            class="resource-card"
-            target="_blank"
-          >
-            <div class="resource-icon">📄</div>
-            <h3>Paper (PDF)</h3>
-            <p>Read the full research paper</p>
-          </a>
-          <a
-            href="https://github.com/girlsuuu/Hijacking"
-            class="resource-card"
-            target="_blank"
-          >
-            <div class="resource-icon">💻</div>
-            <h3>GitHub Repository</h3>
-            <p>Access code and experimental data</p>
-          </a>
-          <a
-            href="https://github.com/girlsuuu/Hijacking#usage"
-            class="resource-card"
-            target="_blank"
-          >
-            <div class="resource-icon">📚</div>
-            <h3>Documentation</h3>
-            <p>Learn how to use the codebase</p>
-          </a>
         </div>
       </div>
     </section>
