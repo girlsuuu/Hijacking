@@ -1,541 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Chain-of-Thought Hijacking: A jailbreak attack on reasoning models that achieves state-of-the-art success rates">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Chain-of-Thought Hijacking: A jailbreak attack on reasoning models that achieves state-of-the-art success rates"
+    />
     <title>Chain-of-Thought Hijacking</title>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
 
     <!-- Chart.js for visualizations -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
-        <div class="container nav-container">
-            <div class="nav-brand">CoT Hijacking</div>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#abstract" class="nav-link">Abstract</a></li>
-                <li><a href="#results" class="nav-link">Results</a></li>
-                <li><a href="#methodology" class="nav-link">Method</a></li>
-                <li><a href="#analysis" class="nav-link">Analysis</a></li>
-                <li><a href="#authors" class="nav-link">Authors</a></li>
-                <li><a href="#citation" class="nav-link">Citation</a></li>
-            </ul>
-            <button class="nav-toggle" id="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+      <div class="container nav-container">
+        <div class="nav-brand">CoT Hijacking</div>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#abstract" class="nav-link">Abstract</a></li>
+          <li><a href="#results" class="nav-link">Results</a></li>
+          <li><a href="#methodology" class="nav-link">Method</a></li>
+          <li><a href="#analysis" class="nav-link">Analysis</a></li>
+          <li><a href="#authors" class="nav-link">Authors</a></li>
+          <li><a href="#citation" class="nav-link">Citation</a></li>
+        </ul>
+        <button class="nav-toggle" id="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-background"></div>
-        <div class="container hero-content">
-            <div class="hero-badge">ICLR 2026</div>
-            <h1 class="hero-title">
-                Chain-of-Thought Hijacking
-                <img src="assets/Jailbreak_Icon_Color.png" alt="🔓" class="title-icon" style="width: 3.5rem; height: 3.5rem; display: inline-block; vertical-align: middle;">
-            </h1>
-            <p class="hero-subtitle">
-                A Simple Yet Powerful Jailbreak Attack on Large Reasoning Models
-            </p>
-            <p class="hero-description">
-                We introduce CoT Hijacking, which achieves <strong>99% attack success rate</strong> on frontier reasoning models
-                by padding harmful requests with benign reasoning sequences.
-            </p>
-            <div class="hero-buttons">
-                <a href="assets/Hijacking_paper.pdf" class="btn btn-primary" target="_blank">
-                    📄 Read Paper
-                </a>
-                <a href="https://github.com/girlsuuu/Hijacking" class="btn btn-secondary" target="_blank">
-                    💻 GitHub Code
-                </a>
-            </div>
+      <div class="hero-background"></div>
+      <div class="container hero-content">
+        <div class="hero-badge">Preprint</div>
+        <h1 class="hero-title">
+          Chain-of-Thought Hijacking
+          <img
+            src="assets/Jailbreak_Icon_Color.png"
+            alt="🔓"
+            class="title-icon"
+            style="
+              width: 3.5rem;
+              height: 3.5rem;
+              display: inline-block;
+              vertical-align: middle;
+            "
+          />
+        </h1>
+        <p class="hero-description" style="font-size: 1.2rem; line-height: 1.6;">
+          We introduce CoT Hijacking, which achieves
+          <strong>99% attack success rate</strong> on frontier <span style="white-space: nowrap;">Large Reasoning Models</span><br>
+          by padding harmful requests with long sequences of benign puzzle reasoning.
+        </p>
+        <div class="hero-buttons">
+          <a
+            href="assets/Hijacking_paper.pdf"
+            class="btn btn-primary"
+            target="_blank"
+          >
+            📄 Read Paper
+          </a>
+          <a
+            href="https://github.com/girlsuuu/Hijacking"
+            class="btn btn-secondary"
+            target="_blank"
+          >
+            💻 GitHub Code
+          </a>
         </div>
-        <div class="scroll-indicator">
-            <span>Scroll to explore</span>
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
-
-    <!-- Key Findings -->
-    <section id="key-findings" class="section">
-        <div class="container">
-            <h2 class="section-title">Key Findings</h2>
-            <div class="findings-grid">
-                <div class="finding-card" data-aos="fade-up">
-                    <div class="finding-number">99%</div>
-                    <div class="finding-model">Gemini 2.5 Pro</div>
-                    <div class="finding-label">Attack Success Rate</div>
-                </div>
-                <div class="finding-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="finding-number">94%</div>
-                    <div class="finding-model">GPT-o4 Mini</div>
-                    <div class="finding-label">Attack Success Rate</div>
-                </div>
-                <div class="finding-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="finding-number">100%</div>
-                    <div class="finding-model">Grok 3 Mini</div>
-                    <div class="finding-label">Attack Success Rate</div>
-                </div>
-                <div class="finding-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="finding-number">94%</div>
-                    <div class="finding-model">Claude 4 Sonnet</div>
-                    <div class="finding-label">Attack Success Rate</div>
-                </div>
-            </div>
-        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span>Scroll to explore</span>
+        <div class="scroll-arrow"></div>
+      </div>
     </section>
 
     <!-- Abstract -->
     <section id="abstract" class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">Abstract</h2>
-            <div class="abstract-content">
-                <p>
-                    Large reasoning models (LRMs) achieve higher task performance by allocating more inference-time compute,
-                    and prior works suggest this scaled reasoning may also strengthen safety by improving refusal.
-                    Yet we find the opposite: <strong>the same reasoning can be used to bypass safety</strong>.
-                </p>
-                <p>
-                    We introduce <em>Chain-of-Thought Hijacking</em>, a jailbreak attack on reasoning models.
-                    The attack pads harmful requests with long sequences of harmless reasoning.
-                    Across HarmBench, CoT Hijacking reaches a <strong>99%, 94%, 100%, and 94%</strong> attack success rate (ASR)
-                    on Gemini 2.5 Pro, GPT o4 mini, Grok 3 mini, and Claude 4 Sonnet, respectively—far exceeding prior jailbreak methods for LRMs.
-                </p>
-                <p>
-                    To understand the effectiveness of our attack, we turn to a mechanistic analysis, which shows that
-                    mid layers encode the <em>strength of safety checking</em>, while late layers encode the <em>verification outcome</em>.
-                    Long benign CoT dilutes both signals by shifting attention away from harmful tokens.
-                    Targeted ablations of attention heads identified by this analysis causally decrease refusal, confirming their role in a safety subnetwork.
-                </p>
-                <button class="btn-expand" id="abstract-expand">Read Full Abstract</button>
-            </div>
+      <div class="container">
+        <h2 class="section-title">Abstract</h2>
+        <div class="abstract-content">
+          <p>
+            Large reasoning models (LRMs) achieve higher task performance by
+            allocating more inference-time compute, and prior works suggest this
+            scaled reasoning may also strengthen safety by improving refusal.
+            Yet we find the opposite: the same reasoning can be used to bypass safety.
+          </p>
+          <p>
+            We introduce <em>Chain-of-Thought Hijacking</em>, a jailbreak attack
+            on reasoning models. The attack pads harmful requests with long
+            sequences of harmless reasoning. Across HarmBench, CoT Hijacking
+            reaches a <strong>99%, 94%, 100%, and 94%</strong> attack success
+            rate (ASR) on Gemini 2.5 Pro, GPT o4 mini, Grok 3 mini, and Claude 4
+            Sonnet, respectively—far exceeding prior jailbreak methods for LRMs.
+          </p>
+          <p>
+            To understand the effectiveness of our attack, we turn to a
+            mechanistic analysis, which shows that mid layers encode the
+            <em>strength of safety checking</em>, while late layers encode the
+            <em>verification outcome</em>. Long benign CoT dilutes both signals
+            by shifting attention away from harmful tokens. Targeted ablations
+            of attention heads identified by this analysis causally decrease
+            refusal, confirming their role in a safety subnetwork.
+          </p>
+          <p>
+            These results show that the most interpretable form of reasoning—explicit
+            CoT—can itself become a jailbreak vector when combined with final-answer cues.
+            We release prompts, outputs, and judge decisions to facilitate replication.
+          </p>
         </div>
-    </section>
-
-    <!-- Overview Figure -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">Attack Overview</h2>
-            <div class="figure-container">
-                <img src="assets/Jailbreaking_Models_Fig02.png" alt="Attack Overview" class="figure-img">
-                <p class="figure-caption">
-                    <strong>Figure 1: Safe vs. Jailbreak Examples.</strong>
-                    The upper part illustrates a safe example where the target model refuses a harmful request.
-                    The lower part shows a successful jailbreak where the target model complies under our attack.
-                    Grey highlights indicate puzzle content, yellow highlights mark malicious requests.
-                </p>
-            </div>
-        </div>
+      </div>
     </section>
 
     <!-- Results -->
     <section id="results" class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">Experimental Results</h2>
-            <p class="section-description">
-                We evaluated CoT Hijacking on 100 HarmBench samples across four frontier reasoning models,
-                comparing against state-of-the-art baseline jailbreak methods.
-            </p>
+      <div class="container">
+        <h2 class="section-title">Experimental Results</h2>
 
-            <!-- Results Table -->
-            <div class="results-table-wrapper">
-                <table class="results-table">
-                    <thead>
-                        <tr>
-                            <th>Target Model</th>
-                            <th>Mousetrap</th>
-                            <th>H-CoT</th>
-                            <th>AutoRAN</th>
-                            <th class="highlight-col">CoT Hijacking (Ours)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Gemini 2.5 Pro</strong></td>
-                            <td>44%</td>
-                            <td>60%</td>
-                            <td>69%</td>
-                            <td class="highlight-col"><strong>99%</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>GPT-o4 Mini</strong></td>
-                            <td>25%</td>
-                            <td>65%</td>
-                            <td>47%</td>
-                            <td class="highlight-col"><strong>94%</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Grok 3 Mini</strong></td>
-                            <td>60%</td>
-                            <td>66%</td>
-                            <td>61%</td>
-                            <td class="highlight-col"><strong>100%</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Claude 4 Sonnet</strong></td>
-                            <td>22%</td>
-                            <td>11%</td>
-                            <td>5%</td>
-                            <td class="highlight-col"><strong>94%</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Chart Visualization -->
-            <div class="chart-container" style="margin-top: 50px;">
-                <canvas id="resultsChart"></canvas>
-            </div>
+        <!-- Chart Visualization -->
+        <div class="chart-container">
+          <canvas id="resultsChart"></canvas>
         </div>
+        <p class="section-description" style="margin-top: 30px; text-align: center;">
+          We evaluated CoT Hijacking on 100 HarmBench samples across four
+          frontier reasoning models, comparing against state-of-the-art baseline
+          jailbreak methods
+        </p>
+
+        <!-- GPT-5 Experimental Results -->
+        <div style="margin-top: 60px">
+          <h3 style="text-align: center; margin-bottom: 30px; font-size: 1.5rem;">
+            Attack GPT-5 Mini with Different Reasoning Effort
+          </h3>
+          <div class="results-table-wrapper" style="max-width: 750px; margin: 0 auto;">
+            <table class="results-table" style="font-size: 1.1rem;">
+              <thead>
+                <tr>
+                  <th style="padding: 20px 40px; font-size: 1.2rem;">Minimal</th>
+                  <th style="padding: 20px 40px; font-size: 1.2rem;">Low</th>
+                  <th style="padding: 20px 40px; font-size: 1.2rem;">High</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 25px 40px; font-size: 1.3rem;"><strong>72%</strong></td>
+                  <td class="highlight-col" style="padding: 25px 40px; font-size: 1.3rem;"><strong>76%</strong></td>
+                  <td style="padding: 25px 40px; font-size: 1.3rem;"><strong>68%</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p
+            class="section-description"
+            style="margin-top: 25px; text-align: center; font-style: italic; font-size: 1.05rem;"
+          >
+            Attack success is highest under low reasoning effort, suggesting reasoning-effort and CoT length are related but distinct controls
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- Methodology -->
     <section id="methodology" class="section">
-        <div class="container">
-            <h2 class="section-title">Attack Methodology</h2>
+      <div class="container">
+        <h2 class="section-title">Attack Methodology</h2>
+      </div>
 
-            <div class="method-overview">
-                <div class="method-diagram">
-                    <img src="assets/Jailbreaking_Models_Fig03_v2.png" alt="Attack Pipeline" class="figure-img">
-                    <p class="figure-caption">
-                        <strong>Figure 2: Jailbreak Method Pipeline.</strong>
-                        The upper part illustrates the process of generating our jailbreak query,
-                        while the lower part shows how the target model is attacked.
-                    </p>
-                </div>
-
-                <div class="method-steps">
-                    <h3>Attack Components</h3>
-                    <div class="step-card">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>Benign Preface</h4>
-                            <p>Generate long chains of harmless reasoning (e.g., solving Sudoku puzzles, logic grids)
-                            to dilute the attention on harmful content.</p>
-                        </div>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>Harmful Payload</h4>
-                            <p>Embed the malicious request after the benign reasoning sequence,
-                            making it appear as part of the puzzle solution.</p>
-                        </div>
-                    </div>
-                    <div class="step-card">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>Final-Answer Cue</h4>
-                            <p>Add explicit cues like "Finally, give the answer:" to shift model attention
-                            toward the answer region and away from safety checks.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CoT Length Experiment -->
-            <div class="subsection" style="margin-top: 60px;">
-                <h3>Impact of CoT Length on Safety</h3>
-                <p>
-                    We tested the S1 reasoning model under three conditions: <strong>Minimal</strong> (truncated reasoning),
-                    <strong>Natural</strong> (default length), and <strong>Extended</strong> (encouraged long reasoning).
-                    The results show a clear trend:
-                </p>
-                <div class="stat-row">
-                    <div class="stat-box">
-                        <div class="stat-value">27%</div>
-                        <div class="stat-label">Minimal CoT</div>
-                    </div>
-                    <div class="stat-arrow">→</div>
-                    <div class="stat-box">
-                        <div class="stat-value">51%</div>
-                        <div class="stat-label">Natural CoT</div>
-                    </div>
-                    <div class="stat-arrow">→</div>
-                    <div class="stat-box highlight-stat">
-                        <div class="stat-value">80%</div>
-                        <div class="stat-label">Extended CoT</div>
-                    </div>
-                </div>
-                <p class="insight-text">
-                    💡 <strong>Key Insight:</strong> Longer reasoning traces substantially increase attack success,
-                    revealing that refusals degrade as CoT length grows.
-                </p>
-            </div>
+      <div class="method-overview" style="display: flex; gap: 50px; align-items: center; max-width: 80%; margin: 40px auto 0; padding: 0 20px;">
+        <!-- Attack Overview Figure -->
+        <div class="figure-container" style="flex: 1; margin-bottom: 0;">
+          <img
+            src="assets/Jailbreaking_Models_Fig02.png"
+            alt="Attack Overview"
+            class="figure-img"
+            style="width: 100%; max-width: none;"
+          />
+          <p class="figure-caption" style="margin-top: 20px;">
+            <strong>Figure 1: Safe vs. Jailbreak Examples.</strong>
+            The upper part illustrates a safe example where the target model
+            refuses a harmful request. The lower part shows a successful
+            jailbreak where the target model complies under our attack. Grey
+            highlights indicate puzzle content, red highlights mark
+            malicious requests.
+          </p>
         </div>
+
+        <div class="method-diagram" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+          <img
+            src="assets/Jailbreaking_Models_Fig03_v2.png"
+            alt="Attack Pipeline"
+            class="figure-img"
+            style="width: 100%; max-width: none;"
+          />
+          <p class="figure-caption" style="margin-top: 20px;">
+            <strong>Figure 2: Jailbreak Method Pipeline.</strong>
+            The upper part illustrates the process of generating our jailbreak
+            query, while the lower part shows how the target model is
+            attacked. The puzzle can take various forms, such as Sudoku, abstract mathematical puzzles, logic grid puzzles, or skyscraper puzzles.
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- Mechanistic Analysis -->
     <section id="analysis" class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">Mechanistic Analysis</h2>
-            <p class="section-description">
-                We analyze <em>why</em> CoT Hijacking works through refusal direction experiments,
-                attention pattern analysis, and causal interventions on attention heads.
-            </p>
+      <div class="container">
+        <h2 class="section-title">Mechanistic Analysis</h2>
+        <p class="section-description">
+          We analyze <em>why</em> CoT Hijacking works through refusal direction
+          experiments, attention pattern analysis, and causal interventions on
+          attention heads.
+        </p>
 
-            <!-- Refusal Direction -->
-            <div class="analysis-subsection">
-                <h3>Refusal Direction in Reasoning Models</h3>
-                <p>
-                    Following prior work, we identified a single activation-space direction that governs refusal behavior.
-                    By ablating this direction on harmful prompts, we increase attack success from <strong>11% to 91%</strong>.
-                    Conversely, adding it to harmless prompts causes over-refusal, dropping success from <strong>94% to 1%</strong>.
-                </p>
-                <div class="intervention-grid">
-                    <div class="intervention-card">
-                        <h4>Harmful Instructions</h4>
-                        <div class="intervention-result">
-                            <span class="before">Baseline: 11%</span>
-                            <span class="arrow">→</span>
-                            <span class="after success">Ablation: 91%</span>
-                        </div>
-                    </div>
-                    <div class="intervention-card">
-                        <h4>Harmless Instructions</h4>
-                        <div class="intervention-result">
-                            <span class="before">Baseline: 94%</span>
-                            <span class="arrow">→</span>
-                            <span class="after danger">Addition: 1%</span>
-                        </div>
-                    </div>
-                </div>
+        <!-- Refusal Direction -->
+        <div class="analysis-subsection">
+          <h3>Refusal Direction in Reasoning Models</h3>
+          <p>
+            Following prior work, we identified a single activation-space
+            direction that governs refusal behavior on <em>large reasoning models</em>. By ablating this direction
+            on harmful prompts, we increase attack success from
+            <strong>11% to 91%</strong>. Conversely, adding it to harmless
+            prompts causes over-refusal, dropping success from
+            <strong>94% to 1%</strong>.
+          </p>
+          <div class="intervention-grid">
+            <div class="intervention-card">
+              <h4>Harmful Instructions</h4>
+              <div class="intervention-result">
+                <span class="before">Baseline: 11%</span>
+                <span class="arrow">→</span>
+                <span class="after success">Ablation: 91%</span>
+              </div>
             </div>
-
-            <!-- Analysis Figures -->
-            <div class="figures-grid">
-                <div class="figure-item">
-                    <img src="assets/overlaid_layer_comparison_3.png" alt="Refusal Components" class="analysis-img">
-                    <p class="figure-caption">
-                        <strong>Figure 3: Refusal Components Across Layers.</strong>
-                        Longer reasoning diminishes the refusal signal in layers 25-35.
-                    </p>
-                </div>
-                <div class="figure-item">
-                    <img src="assets/new_head_ablation_comparison_1.png" alt="Head Ablation" class="analysis-img">
-                    <p class="figure-caption">
-                        <strong>Figure 4: Attention Head Ablation.</strong>
-                        Ablating 60 heads flattens refusal, proving their causal role.
-                    </p>
-                </div>
+            <div class="intervention-card">
+              <h4>Harmless Instructions</h4>
+              <div class="intervention-result">
+                <span class="before">Baseline: 94%</span>
+                <span class="arrow">→</span>
+                <span class="after danger">Addition: 1%</span>
+              </div>
             </div>
-
-            <!-- Attention Analysis -->
-            <div class="analysis-subsection" style="margin-top: 50px;">
-                <h3>Attention Pattern Analysis</h3>
-                <p>
-                    We measured how attention shifts away from harmful tokens as CoT length increases.
-                    The attention ratio (harmful/puzzle tokens) declines systematically, especially in layers 25-35.
-                </p>
-                <div class="figures-grid">
-                    <div class="figure-item">
-                        <img src="assets/attention_ratio_trend_1.png" alt="Attention Ratio" class="analysis-img">
-                        <p class="figure-caption">
-                            <strong>Figure 5: Attention Ratio vs CoT Length.</strong>
-                            Longer CoT reduces attention to harmful instructions.
-                        </p>
-                    </div>
-                    <div class="figure-item">
-                        <img src="assets/attention_layer_analysis.png" alt="Layer Analysis" class="analysis-img">
-                        <p class="figure-caption">
-                            <strong>Figure 6: Layer-wise Attention Ratio.</strong>
-                            Layers 25-35 show the strongest decline.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Causal Interventions -->
-            <div class="analysis-subsection" style="margin-top: 50px;">
-                <h3>Causal Intervention: Attention Head Ablation</h3>
-                <p>
-                    We ablated 60 specific heads (layers 15-35) that showed declining attention to harmful tokens.
-                    This targeted intervention proved causal: refusal components flattened, making harmful and harmless prompts indistinguishable.
-                </p>
-                <div class="figures-grid">
-                    <div class="figure-item">
-                        <img src="assets/6_baseline_vs_predefined_ablation_1k_1.png" alt="Targeted Ablation" class="analysis-img">
-                        <p class="figure-caption">
-                            <strong>Figure 7: Targeted Head Ablation.</strong>
-                            Ablating selected heads has strong effect.
-                        </p>
-                    </div>
-                    <div class="figure-item">
-                        <img src="assets/6_baseline_vs_random_ablation_1k_1.png" alt="Random Ablation" class="analysis-img">
-                        <p class="figure-caption">
-                            <strong>Figure 8: Random Head Ablation.</strong>
-                            Random ablation shows weaker effect.
-                        </p>
-                    </div>
-                </div>
-                <div class="figures-grid" style="margin-top: 30px;">
-                    <div class="figure-item">
-                        <img src="assets/6front_baseline_vs_predefined_ablation_1k_1.png" alt="Front Layers" class="analysis-img">
-                        <p class="figure-caption">
-                            <strong>Figure 9: Front-layer Heads (15-23).</strong>
-                            Early layers play a stronger role.
-                        </p>
-                    </div>
-                    <div class="figure-item">
-                        <img src="assets/6deep_baseline_vs_predefined_ablation_1k_1.png" alt="Deep Layers" class="analysis-img">
-                        <p class="figure-caption">
-                            <strong>Figure 10: Deep-layer Heads (23-35).</strong>
-                            Later layers have weaker impact.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Key Insights -->
-            <div class="insights-box">
-                <h3>🔍 Mechanistic Insights</h3>
-                <ul class="insights-list">
-                    <li>
-                        <strong>Low-dimensional refusal:</strong> Safety checks rely on a single direction in activation space,
-                        which can be bidirectionally controlled.
-                    </li>
-                    <li>
-                        <strong>Refusal dilution:</strong> Long benign reasoning dilutes the refusal signal by shifting attention
-                        away from harmful tokens (only ~5% of context).
-                    </li>
-                    <li>
-                        <strong>Safety subnetwork:</strong> Specific attention heads in layers 15-35 are causally responsible
-                        for safety checking. Ablating them eliminates refusals.
-                    </li>
-                    <li>
-                        <strong>Layer dynamics:</strong> Mid-layers encode the <em>strength</em> of safety checking,
-                        while late layers encode the <em>outcome</em>. CoT hijacking suppresses both.
-                    </li>
-                </ul>
-            </div>
+          </div>
         </div>
+
+        <!-- Attention Analysis -->
+        <div class="analysis-subsection" style="margin-top: 50px">
+          <h3>Attention Pattern Analysis</h3>
+          <p>
+            Longer CoT sequences consistently reduce refusal components in the later layers.
+            As CoT length increases, attention systematically shifts away from harmful tokens, diluting the safety mechanisms that detect and refuse unsafe requests.
+          </p>
+          <div class="figures-grid">
+            <div class="figure-item">
+              <img
+                src="assets/overlaid_layer_comparison_3.png"
+                alt="Refusal Components"
+                class="analysis-img"
+              />
+              <p class="figure-caption">
+                <strong>Figure 3: Refusal Components Across Layers for Different CoT Lengths.</strong>
+                Longer reasoning diminishes the refusal signal.
+              </p>
+            </div>
+            <div class="figure-item">
+              <img
+                src="assets/attention_ratio_trend_1.png"
+                alt="Attention Ratio"
+                class="analysis-img"
+              />
+              <p class="figure-caption">
+                <strong>Figure 4: Attention Ratio vs CoT Length.</strong>
+                Longer CoT reduces attention to harmful instructions.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Causal Interventions -->
+        <div class="analysis-subsection" style="margin-top: 50px">
+          <h3>Causal Intervention: Attention Head Ablation</h3>
+          <p>
+            We ablated 6 specific attention heads that showed 'longer CoT, lower ratio'.
+            This targeted intervention proved causal: refusal signals flattened, leading to compliance with harmful requests.
+          </p>
+          <div class="figures-grid">
+            <div class="figure-item">
+              <img
+                src="assets/6_baseline_vs_predefined_ablation_1k_1.png"
+                alt="Targeted Ablation"
+                class="analysis-img"
+              />
+              <p class="figure-caption">
+                <strong>Figure 5: Targeted Head Ablation.</strong>
+                Ablating selected heads has strong effect.
+              </p>
+            </div>
+            <div class="figure-item">
+              <img
+                src="assets/6_baseline_vs_random_ablation_1k_1.png"
+                alt="Random Ablation"
+                class="analysis-img"
+              />
+              <p class="figure-caption">
+                <strong>Figure 6: Random Head Ablation.</strong>
+                Random ablation shows weaker effect.
+              </p>
+            </div>
+          </div>
+          <div class="figures-grid" style="margin-top: 30px">
+            <div class="figure-item">
+              <img
+                src="assets/6front_baseline_vs_predefined_ablation_1k_1.png"
+                alt="Front Layers"
+                class="analysis-img"
+              />
+              <p class="figure-caption">
+                <strong>Figure 7: Front-layer Heads (15-23).</strong>
+                Early layers play a stronger role.
+              </p>
+            </div>
+            <div class="figure-item">
+              <img
+                src="assets/6deep_baseline_vs_predefined_ablation_1k_1.png"
+                alt="Deep Layers"
+                class="analysis-img"
+              />
+              <p class="figure-caption">
+                <strong>Figure 8: Deep-layer Heads (23-35).</strong>
+                Later layers have weaker impact.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Insights -->
+        <div class="insights-box">
+          <h3>🔍 Mechanistic Insights</h3>
+          <ul class="insights-list">
+            <li>
+              <strong>Low-dimensional refusal:</strong> Safety checks rely on a
+              single direction in activation space, which can be bidirectionally
+              controlled.
+            </li>
+            <li>
+              <strong>Refusal dilution:</strong> Long benign reasoning dilutes
+              the refusal signal by shifting attention away from harmful tokens
+              (only ~5% of context).
+            </li>
+            <li>
+              <strong>Safety subnetwork:</strong> Specific attention heads in
+              layers 15-35 are causally responsible for safety checking.
+              Ablating them eliminates refusals.
+            </li>
+            <li>
+              <strong>Toward mitigation:</strong> Effective defenses require
+              deeper integration of safety into reasoning itself—monitoring
+              refusal activation across layers, penalizing dilution, or
+              enforcing attention to harmful spans regardless of reasoning length.
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <!-- Authors -->
     <section id="authors" class="section">
-        <div class="container">
-            <h2 class="section-title">Authors</h2>
-            <div class="authors-grid">
-                <div class="author-card">
-                    <div class="author-name">Jianli Zhao</div>
-                    <div class="author-affiliation">Independent</div>
-                    <div class="author-note">Core contributor</div>
-                </div>
-                <div class="author-card">
-                    <div class="author-name">Tingchen Fu</div>
-                    <div class="author-affiliation">Renmin University of China</div>
-                </div>
-                <div class="author-card">
-                    <div class="author-name">
-                        <a href="https://rylanschaeffer.github.io/" target="_blank">Rylan Schaeffer</a>
-                    </div>
-                    <div class="author-affiliation">Stanford University</div>
-                </div>
-                <div class="author-card">
-                    <div class="author-name">
-                        <a href="https://www.mrinanksharma.net/" target="_blank">Mrinank Sharma</a>
-                    </div>
-                    <div class="author-affiliation">Anthropic</div>
-                </div>
-                <div class="author-card">
-                    <div class="author-name">
-                        <a href="https://fbarez.github.io/" target="_blank">Fazl Barez</a>
-                    </div>
-                    <div class="author-affiliation">University of Oxford · WhiteBox · Martian</div>
-                    <div class="author-note">Core contributor · Corresponding author</div>
-                </div>
+      <div class="container">
+        <h2 class="section-title">Authors</h2>
+        <div class="authors-grid">
+          <div class="author-card">
+            <div class="author-name">Jianli Zhao</div>
+            <div class="author-affiliation">Independent</div>
+          </div>
+          <div class="author-card">
+            <div class="author-name">Tingchen Fu</div>
+            <div class="author-affiliation">Renmin University of China</div>
+          </div>
+          <div class="author-card">
+            <div class="author-name">Rylan Schaeffer</div>
+            <div class="author-affiliation">Stanford University</div>
+          </div>
+          <div class="author-card">
+            <div class="author-name">Mrinank Sharma</div>
+            <div class="author-affiliation">Anthropic</div>
+          </div>
+          <div class="author-card">
+            <div class="author-name">Fazl Barez</div>
+            <div class="author-affiliation">
+              University of Oxford · WhiteBox · Martian
             </div>
+            <div class="author-note">Corresponding author</div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Citation -->
     <section id="citation" class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">Citation</h2>
-            <div class="citation-box">
-                <pre id="bibtex-content">@article{zhao2026cot,
-  title={Chain-of-Thought Hijacking},
-  author={Jianli Zhao and Tingchen Fu and Rylan Schaeffer and Mrinank Sharma and Fazl Barez},
-  journal={ICLR},
-  year={2026}
-}</pre>
-                <button class="btn-copy" id="copy-bibtex">
-                    📋 Copy BibTeX
-                </button>
-            </div>
+      <div class="container">
+        <h2 class="section-title">Citation</h2>
+        <div class="citation-box">
+          <pre id="bibtex-content">
+@article{To be arxived...
+}</pre
+          >
+          <button class="btn-copy" id="copy-bibtex">📋 Copy BibTeX</button>
         </div>
+      </div>
     </section>
 
     <!-- Resources -->
     <section class="section">
-        <div class="container">
-            <h2 class="section-title">Resources</h2>
-            <div class="resources-grid">
-                <a href="assets/Hijacking_paper.pdf" class="resource-card" target="_blank">
-                    <div class="resource-icon">📄</div>
-                    <h3>Paper (PDF)</h3>
-                    <p>Read the full research paper</p>
-                </a>
-                <a href="https://github.com/girlsuuu/Hijacking" class="resource-card" target="_blank">
-                    <div class="resource-icon">💻</div>
-                    <h3>GitHub Repository</h3>
-                    <p>Access code and experimental data</p>
-                </a>
-                <a href="https://github.com/girlsuuu/Hijacking#usage" class="resource-card" target="_blank">
-                    <div class="resource-icon">📚</div>
-                    <h3>Documentation</h3>
-                    <p>Learn how to use the codebase</p>
-                </a>
-            </div>
+      <div class="container">
+        <h2 class="section-title">Resources</h2>
+        <div class="resources-grid">
+          <a
+            href="assets/Hijacking_paper.pdf"
+            class="resource-card"
+            target="_blank"
+          >
+            <div class="resource-icon">📄</div>
+            <h3>Paper (PDF)</h3>
+            <p>Read the full research paper</p>
+          </a>
+          <a
+            href="https://github.com/girlsuuu/Hijacking"
+            class="resource-card"
+            target="_blank"
+          >
+            <div class="resource-icon">💻</div>
+            <h3>GitHub Repository</h3>
+            <p>Access code and experimental data</p>
+          </a>
+          <a
+            href="https://github.com/girlsuuu/Hijacking#usage"
+            class="resource-card"
+            target="_blank"
+          >
+            <div class="resource-icon">📚</div>
+            <h3>Documentation</h3>
+            <p>Learn how to use the codebase</p>
+          </a>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>⚠️ Safety Notice</h4>
-                    <p>
-                        This research is for <strong>defensive security purposes only</strong>.
-                        Do not use these methods for malicious purposes.
-                        We release this work to help the community build more robust safety mechanisms.
-                    </p>
-                </div>
-                <div class="footer-section">
-                    <h4>🔗 Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="https://github.com/girlsuuu/Hijacking" target="_blank">GitHub</a></li>
-                        <li><a href="assets/Hijacking_paper.pdf" target="_blank">Paper</a></li>
-                        <li><a href="mailto:fazl@robots.ox.ac.uk">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>📝 Acknowledgments</h4>
-                    <p>
-                        This codebase builds upon <a href="https://github.com/patrickrchao/JailbreakingLLMs" target="_blank">PAIR</a>
-                        by Patrick Chao et al. We thank OpenAI and Anthropic for API credits.
-                    </p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Chain-of-Thought Hijacking. All rights reserved.</p>
-            </div>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h4>⚠️ Safety Notice</h4>
+            <p>
+              This research is for
+              <strong>defensive security purposes only</strong>.<br />
+              Do not use these methods for malicious purposes. We release this
+              work to help the community build more robust safety mechanisms.
+            </p>
+          </div>
         </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 Chain-of-Thought Hijacking. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
 
     <!-- Back to Top Button -->
@@ -543,5 +487,5 @@
 
     <!-- Scripts -->
     <script src="js/app.js"></script>
-</body>
+  </body>
 </html>
