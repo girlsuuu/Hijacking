@@ -5,91 +5,12 @@
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    initNavbar();
-    initMobileMenu();
     initBackToTop();
     initSmoothScroll();
     initCopyBibtex();
     initResultsChart();
     initImageZoom();
 });
-
-/**
- * Navbar scroll effect
- */
-function initNavbar() {
-    const navbar = document.getElementById('navbar');
-
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
-
-    // Highlight active nav link based on scroll position
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    window.addEventListener('scroll', () => {
-        let current = '';
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-
-            if (window.pageYOffset >= sectionTop - 100) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
-        });
-    });
-}
-
-/**
- * Mobile menu toggle
- */
-function initMobileMenu() {
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-
-            // Animate hamburger icon
-            const spans = this.querySelectorAll('span');
-            if (navMenu.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
-        });
-
-        // Close menu when clicking a link
-        const navLinks = navMenu.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                const spans = navToggle.querySelectorAll('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            });
-        });
-    }
-}
 
 /**
  * Back to top button
@@ -130,8 +51,7 @@ function initSmoothScroll() {
 
             const target = document.querySelector(href);
             if (target) {
-                const navbarHeight = document.getElementById('navbar').offsetHeight;
-                const targetPosition = target.offsetTop - navbarHeight - 20;
+                const targetPosition = target.offsetTop - 20;
 
                 window.scrollTo({
                     top: targetPosition,
@@ -156,7 +76,7 @@ function initCopyBibtex() {
             // Modern clipboard API
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(text).then(() => {
-                    showCopyFeedback(copyBtn, '✓ Copied!');
+                    showCopyFeedback(copyBtn, 'Copied!');
                 }).catch(err => {
                     console.error('Failed to copy:', err);
                     fallbackCopy(text, copyBtn);
@@ -181,9 +101,9 @@ function fallbackCopy(text, btn) {
 
     try {
         document.execCommand('copy');
-        showCopyFeedback(btn, '✓ Copied!');
+        showCopyFeedback(btn, 'Copied!');
     } catch (err) {
-        showCopyFeedback(btn, '✗ Failed');
+        showCopyFeedback(btn, 'Failed');
     }
 
     document.body.removeChild(textarea);
@@ -195,7 +115,7 @@ function fallbackCopy(text, btn) {
 function showCopyFeedback(btn, message) {
     const originalText = btn.textContent;
     btn.textContent = message;
-    btn.style.background = '#10b981';
+    btn.style.background = '#3B82F6';
 
     setTimeout(() => {
         btn.textContent = originalText;
@@ -219,30 +139,30 @@ function initResultsChart() {
             {
                 label: 'Mousetrap',
                 data: [44, 25, 60, 22],
-                backgroundColor: 'rgba(100, 116, 139, 0.7)',
-                borderColor: 'rgba(100, 116, 139, 1)',
-                borderWidth: 2
+                backgroundColor: 'rgba(226, 232, 240, 0.7)',
+                borderColor: 'rgba(148, 163, 184, 1)',
+                borderWidth: 1
             },
             {
                 label: 'H-CoT',
                 data: [60, 65, 66, 11],
-                backgroundColor: 'rgba(251, 146, 60, 0.7)',
-                borderColor: 'rgba(251, 146, 60, 1)',
-                borderWidth: 2
+                backgroundColor: 'rgba(203, 213, 225, 0.7)',
+                borderColor: 'rgba(100, 116, 139, 1)',
+                borderWidth: 1
             },
             {
                 label: 'AutoRAN',
                 data: [69, 47, 61, 5],
-                backgroundColor: 'rgba(59, 130, 246, 0.7)',
-                borderColor: 'rgba(59, 130, 246, 1)',
-                borderWidth: 2
+                backgroundColor: 'rgba(148, 163, 184, 0.7)',
+                borderColor: 'rgba(71, 85, 105, 1)',
+                borderWidth: 1
             },
             {
                 label: 'CoT Hijacking (Ours)',
                 data: [99, 94, 100, 94],
-                backgroundColor: 'rgba(102, 126, 234, 0.8)',
-                borderColor: 'rgba(118, 75, 162, 1)',
-                borderWidth: 3
+                backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                borderColor: 'rgba(37, 99, 235, 1)',
+                borderWidth: 2
             }
         ]
     };
@@ -397,14 +317,14 @@ function createImageModal(src, alt) {
     `;
 
     closeBtn.onmouseover = () => {
-        closeBtn.style.background = '#ef4444';
+        closeBtn.style.background = '#3B82F6';
         closeBtn.style.color = 'white';
         closeBtn.style.transform = 'rotate(90deg)';
     };
 
     closeBtn.onmouseout = () => {
         closeBtn.style.background = 'white';
-        closeBtn.style.color = 'black';
+        closeBtn.style.color = '#1E293B';
         closeBtn.style.transform = 'rotate(0deg)';
     };
 
@@ -468,17 +388,17 @@ if ('IntersectionObserver' in window) {
 }
 
 /**
- * Console easter egg
+ * Console message
  */
 console.log(
-    '%c⚠️ Chain-of-Thought Hijacking Research ⚠️',
-    'font-size: 20px; font-weight: bold; color: #667eea;'
+    '%cChain-of-Thought Hijacking Research',
+    'font-size: 16px; font-weight: 600; color: #1E293B;'
 );
 console.log(
     '%cThis research is for defensive security purposes only.',
-    'font-size: 14px; color: #64748b;'
+    'font-size: 12px; color: #64748B;'
 );
 console.log(
-    '%c🔗 GitHub: https://github.com/girlsuuu/Hijacking',
-    'font-size: 12px; color: #10b981;'
+    '%cGitHub: https://github.com/girlsuuu/Hijacking',
+    'font-size: 12px; color: #3B82F6;'
 );
