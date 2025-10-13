@@ -83,6 +83,10 @@ a {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
 }
 
+p {
+  line-height: 1.6;
+}
+
 strong {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 14px;
@@ -159,4 +163,49 @@ span.highlight {
 
 .img-responsive {
     margin: 0 auto;
+}
+
+/* Additional styles for the chart container */
+.chart-container {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Ensure proper spacing */
+header {
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+section {
+    margin-bottom: 2em;
+}
+
+footer {
+    margin-top: 3em;
+    margin-bottom: 2em;
+    padding-top: 1em;
+    border-top: 1px solid #ddd;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body,
+    td,
+    th,
+    tr,
+    p,
+    a {
+        font-size: 12px;
+    }
+
+    .list-inline > li {
+        display: block;
+        margin: 0.3em 0;
+    }
 }

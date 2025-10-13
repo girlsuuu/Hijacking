@@ -1,298 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Chain-of-Thought Hijacking: A jailbreak attack on reasoning models that achieves state-of-the-art success rates"
-    />
-    <title>Chain-of-Thought Hijacking</title>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Chain-of-Thought Hijacking: A jailbreak attack on reasoning models that achieves state-of-the-art success rates">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+  <title>Chain-of-Thought Hijacking</title>
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/style.css" />
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+  <link rel="stylesheet" href="css/app.css">
 
-    <!-- Chart.js for visualizations -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  </head>
-  <body>
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="hero-background"></div>
-      <div class="container hero-content">
-        <div class="hero-badge">Preprint</div>
-        <h1 class="hero-title">
-          Chain-of-Thought Hijacking
-          <img
-            src="assets/Jailbreak_Icon_Color.png"
-            alt="🔓"
-            class="title-icon"
-            style="width: 2.8rem; height: 2.8rem; display: inline-block; vertical-align: middle;"
-          />
-        </h1>
-        <p class="hero-description">
-          We introduce CoT Hijacking, which achieves
-          <strong>99% attack success rate</strong> on frontier <span style="white-space: nowrap;">Large Reasoning Models</span><br>
-          by padding harmful requests with long sequences of benign puzzle reasoning.
-        </p>
-        <div class="hero-buttons">
-          <a
-            href="assets/Hijacking_paper.pdf"
-            class="btn btn-primary"
-            target="_blank"
-          >
-            Read Paper
-          </a>
-          <a
-            href="https://github.com/girlsuuu/Hijacking"
-            class="btn btn-secondary"
-            target="_blank"
-          >
-            View Code
-          </a>
-        </div>
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="js/app.js"></script>
+</head>
 
-        <!-- Authors on Hero Page -->
-        <div class="hero-authors">
-          <div style="display: flex; justify-content: center; gap: 3rem; margin: 0 auto; flex-wrap: wrap;">
-            <div style="text-align: center;">
-              <div style="font-size: 1rem; font-weight: 400; margin-bottom: 0.3rem; white-space: nowrap;">Jianli Zhao</div>
-              <div style="font-size: 0.85rem; color: #666; white-space: nowrap;">Independent</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="font-size: 1rem; font-weight: 400; margin-bottom: 0.3rem; white-space: nowrap;">Tingchen Fu</div>
-              <div style="font-size: 0.85rem; color: #666; white-space: nowrap;">Renmin University of China</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="font-size: 1rem; font-weight: 400; margin-bottom: 0.3rem; white-space: nowrap;">Rylan Schaeffer</div>
-              <div style="font-size: 0.85rem; color: #666; white-space: nowrap;">Stanford University</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="font-size: 1rem; font-weight: 400; margin-bottom: 0.3rem; white-space: nowrap;">Mrinank Sharma</div>
-              <div style="font-size: 0.85rem; color: #666; white-space: nowrap;">Anthropic</div>
-            </div>
-            <div style="text-align: center;">
-              <div style="font-size: 1rem; font-weight: 400; margin-bottom: 0.3rem; white-space: nowrap;">Fazl Barez</div>
-              <div style="font-size: 0.85rem; color: #666; white-space: nowrap;">University of Oxford · WhiteBox · Martian</div>
-            </div>
-          </div>
-        </div>
+<body>
+  <div class="container" id="main">
+    <!-- Title -->
+    <header class="row">
+      <h2 class="col-md-12 text-center">
+        <b>
+          <font size="+6">Chain-of-Thought Hijacking</font>
+          <img src="assets/Jailbreak_Icon_Color.png" alt="🔓" style="width: 5rem; height: 5rem; display: inline-block; vertical-align: middle; margin-left: 10px;">
+        </b>
+      </h2>
+    </header>
+
+    <!-- Authors -->
+    <section class="row" style="margin-bottom: 0.5em;">
+      <div class="col-md-12 text-center">
+        <!-- First row authors -->
+        <ul class="list-inline">
+          <li><a href="https://jianli-zhao.github.io/" target="_blank" style="color: inherit;">Jianli Zhao</a></li>
+          <li><a href="https://tingchenfu.github.io/" target="_blank" style="color: inherit;">Tingchen Fu</a></li>
+          <li><a href="http://rylanschaeffer.github.io/" target="_blank" style="color: inherit;">Rylan Schaeffer</a></li>
+          <li><a href="https://www.mrinanksharma.net" target="_blank" style="color: inherit;">Mrinank Sharma</a></li>
+          <li><a href="https://fbarez.github.io/" target="_blank" style="color: inherit;">Fazl Barez</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Links -->
+    <section class="row">
+      <div class="col-md-8 col-md-offset-2 text-center">
+        <h3>
+          <a href="assets/Hijacking_paper.pdf" target="_blank">Paper</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="https://github.com/jianli-zhao/Hijacking" target="_blank">Code</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="#examples" onclick="document.getElementById('examples-section').scrollIntoView({behavior: 'smooth'});">Example</a>
+        </h3>
       </div>
     </section>
 
     <!-- Abstract -->
-    <section id="abstract" class="section section-alt">
-      <div class="container">
-        <h2 class="section-title">Abstract</h2>
-        <div class="abstract-content">
-          <p>
-            Large reasoning models (LRMs) achieve higher task performance by
-            allocating more inference-time compute, and prior works suggest this
-            scaled reasoning may also strengthen safety by improving refusal.
-            Yet we find the opposite: the same reasoning can be used to bypass safety.
-          </p>
-          <p>
-            We introduce <em>Chain-of-Thought Hijacking</em>, a jailbreak attack
-            on reasoning models. The attack pads harmful requests with long
-            sequences of harmless reasoning. Across HarmBench, CoT Hijacking
-            reaches a <strong>99%, 94%, 100%, and 94%</strong> attack success
-            rate (ASR) on Gemini 2.5 Pro, GPT o4 mini, Grok 3 mini, and Claude 4
-            Sonnet, respectively—far exceeding prior jailbreak methods for LRMs.
-          </p>
-          <p>
-            To understand the effectiveness of our attack, we turn to a
-            mechanistic analysis, which shows that mid layers encode the
-            <em>strength of safety checking</em>, while late layers encode the
-            <em>verification outcome</em>. Long benign CoT dilutes both signals
-            by shifting attention away from harmful tokens. Targeted ablations
-            of attention heads identified by this analysis causally decrease
-            refusal, confirming their role in a safety subnetwork.
-          </p>
-          <p>
-            These results show that the most interpretable form of reasoning—explicit
-            CoT—can itself become a jailbreak vector when combined with final-answer cues.
-            We release prompts, outputs, and judge decisions to facilitate replication.
-          </p>
-        </div>
+    <section class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h3>Abstract</h3>
+        <p class="text-justify">
+          Large reasoning models (LRMs) achieve higher task performance by allocating more inference-time compute, and prior works suggest this scaled reasoning may also strengthen safety by improving refusal. Yet we find the opposite: the same reasoning can be used to bypass safety. We introduce <em>Chain-of-Thought Hijacking</em>, a jailbreak attack on reasoning models. The attack pads harmful requests with long sequences of harmless reasoning. Across HarmBench, CoT Hijacking reaches a <strong>99%, 94%, 100%, and 94%</strong> attack success rate (ASR) on Gemini 2.5 Pro, GPT o4 mini, Grok 3 mini, and Claude 4 Sonnet, respectively—far exceeding prior jailbreak methods for LRMs. To understand the effectiveness of our attack, we turn to a mechanistic analysis, which shows that mid layers encode the <em>strength of safety checking</em>, while late layers encode the <em>verification outcome</em>. Long benign CoT dilutes both signals by shifting attention away from harmful tokens. Targeted ablations of attention heads identified by this analysis causally decrease refusal, confirming their role in a safety subnetwork. These results show that the most interpretable form of reasoning—explicit CoT—can itself become a jailbreak vector when combined with final-answer cues. We release prompts, outputs, and judge decisions to facilitate replication.
+        </p>
       </div>
     </section>
 
-    <!-- Results -->
-    <section id="results" class="section section-alt">
-      <div class="container">
-        <h2 class="section-title">Experimental Results</h2>
+    <!-- Attack Pipeline Figure -->
+    <section class="col-md-12 text-center" style="margin-top: 20px;">
+      <img src="assets/Jailbreaking_Models_Fig03_v2.png" style="width: 55%; height: auto;" class="img-responsive" alt="Attack Pipeline">
+    </section>
 
-        <!-- Chart Visualization -->
+    <!-- Figure Caption -->
+    <section class="col-md-8 col-md-offset-2" style="color: rgb(83, 83, 83); margin-top: 10px;">
+      <p>
+        <strong>Figure 1: Jailbreak Method Pipeline.</strong> The upper part illustrates the process of generating our jailbreak query, while the lower part shows how the target model is attacked.
+      </p>
+    </section>
+
+    <!-- Spacing -->
+    <section class="col-md-12" style="margin-top: 1px;"></section>
+
+    <!-- Experimental Results Chart -->
+    <section class="row">
+      <div class="col-md-8 col-md-offset-2">
         <div class="chart-container">
           <canvas id="resultsChart"></canvas>
         </div>
-        <p class="section-description" style="margin-top: 30px; text-align: center;">
-          We evaluated CoT Hijacking on 100 HarmBench samples across four
-          frontier reasoning models, comparing against state-of-the-art baseline
-          jailbreak methods
+        <p class="text-center" style="margin-top: 20px; color: rgb(83, 83, 83);">
+          <strong>Figure 2: Attack Success Rate Comparison.</strong> We evaluated CoT Hijacking on 100 HarmBench samples across four frontier reasoning models, comparing against state-of-the-art baseline jailbreak methods. Our method achieves significantly higher attack success rates across all models.
         </p>
       </div>
     </section>
 
-    <!-- Methodology -->
-    <section id="methodology" class="section">
-      <div class="container">
-        <h2 class="section-title">Attack Methodology</h2>
-      </div>
+    <!-- Spacing -->
+    <section class="col-md-12" style="margin-top: 30px;"></section>
 
-      <div class="method-overview">
-        <!-- Attack Overview Figure -->
-        <div class="figure-container" style="flex: 1; margin-bottom: 0;">
-          <img
-            src="assets/Jailbreaking_Models_Fig02.png"
-            alt="Attack Overview"
-            class="figure-img"
-          />
-          <p class="figure-caption">
-            <strong>Figure 1: Safe vs. Jailbreak Examples.</strong>
-            Grey highlights indicate puzzle content, red highlights mark
-            malicious requests.
-          </p>
+    <!-- Example Jailbreaks -->
+    <section id="examples-section" class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h3 class="text-center" style="margin-bottom: 20px;">Example Jailbreak</h3>
+        <p class="text-center" style="color: red; margin-bottom: 20px;">WARNING: EXAMPLE CONTAIN HARMFUL CONTENT</p>
+        <div class="text-center">
+          <img src="assets/Jailbreaking_Models_Fig02.png" style="width: 100%; height: auto;" class="img-responsive" alt="Example Jailbreaks">
         </div>
-
-        <div class="method-diagram">
-          <img
-            src="assets/Jailbreaking_Models_Fig03_v2.png"
-            alt="Attack Pipeline"
-            class="figure-img"
-          />
-          <p class="figure-caption">
-            <strong>Figure 2: Jailbreak Method Pipeline.</strong>
-            The upper part illustrates the process of generating our jailbreak
-            query, while the lower part shows how the target model is
-            attacked.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Mechanistic Analysis -->
-    <section id="analysis" class="section section-alt">
-      <div class="container">
-        <h2 class="section-title">Mechanistic Analysis</h2>
-        <p class="section-description">
-          We analyze <em>why</em> CoT Hijacking works through refusal direction
-          experiments, attention pattern analysis, and causal interventions on
-          attention heads.
+        <p class="text-center" style="margin-top: 15px; color: rgb(83, 83, 83);">
+          <strong>Figure 3: Safe vs. Jailbreak Example.</strong> Grey highlights indicate puzzle content, red highlights mark malicious requests/contents.
         </p>
-
-        <!-- Attention Analysis -->
-        <div class="analysis-subsection">
-          <h3>Attention Pattern Analysis</h3>
-          <!-- <p>
-            Longer CoT sequences consistently reduce refusal components in the later layers.
-            As CoT length increases, attention systematically shifts away from harmful tokens, diluting the safety mechanisms that detect and refuse unsafe requests.
-          </p> -->
-          <div class="figures-grid">
-            <div class="figure-item">
-              <img
-                src="assets/overlaid_layer_comparison_3.png"
-                alt="Refusal Components"
-                class="analysis-img"
-              />
-              <p class="figure-caption">
-                <strong>Figure 3: Refusal Components Across Layers for Different CoT Lengths.</strong>
-                Longer reasoning diminishes the refusal signal.
-              </p>
-            </div>
-            <div class="figure-item">
-              <img
-                src="assets/attention_ratio_trend_1.png"
-                alt="Attention Ratio"
-                class="analysis-img"
-              />
-              <p class="figure-caption">
-                <strong>Figure 4: Attention Ratio vs CoT Length.</strong>
-                Longer CoT reduces attention to harmful instructions.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Key Insights -->
-        <div class="insights-box">
-          <h3>Mechanistic Insights</h3>
-          <ul class="insights-list">
-            <li>
-              <strong>Low-dimensional refusal:</strong> Safety checks rely on a
-              single direction in activation space, which can be bidirectionally
-              controlled.
-            </li>
-            <li>
-              <strong>Refusal dilution:</strong> Long benign reasoning dilutes
-              the refusal signal by shifting attention away from harmful tokens
-              (only ~5% of context).
-            </li>
-            <li>
-              <strong>Safety subnetwork:</strong> Specific attention heads in
-              layers 15-35 are causally responsible for safety checking.
-              Ablating them eliminates refusals.
-            </li>
-            <li>
-              <strong>Toward mitigation:</strong> Effective defenses require
-              deeper integration of safety into reasoning itself—monitoring
-              refusal activation across layers, penalizing dilution, or
-              enforcing attention to harmful spans regardless of reasoning length.
-            </li>
-          </ul>
-        </div>
       </div>
     </section>
+
+    <!-- Spacing -->
+    <section class="col-md-12" style="margin-top: 30px;"></section>
 
     <!-- Citation -->
-    <section id="citation" class="section section-alt">
-      <div class="container">
-        <h2 class="section-title">Citation</h2>
-        <div class="citation-box">
-          <pre id="bibtex-content">
-@article{To be arxived...
+    <section class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h3>Citation</h3>
+        <div class="form-group col-md-10 col-md-offset-1">
+          <textarea id="bibtex" class="form-control" readonly>
+@article{To be arxived
   ...
   ...
   ...
-}</pre
-          >
-          <button class="btn-copy" id="copy-bibtex">Copy BibTeX</button>
+  ...
+}</textarea>
         </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-section">
-            <h4>⚠️ Safety Notice</h4>
-            <p>
-              This research is for
-              <strong>defensive security purposes only</strong>.<br />
-              Do not use these methods for malicious purposes. We release this
-              work to help the community build more robust safety mechanisms.
-            </p>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>&copy; 2026 Chain-of-Thought Hijacking. All rights reserved.</p>
-        </div>
+    <footer class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <p class="text-justify" style="margin-top: 30px;">
+          <strong>⚠️ Safety Notice:</strong> This research is for <strong>defensive security purposes only</strong>. Do not use these methods for malicious purposes. We release this work to help the community build more robust safety mechanisms.
+        </p>
+        <p class="text-justify">
+          This site's design is adapted from <a href="https://jplhughes.github.io/bon-jailbreaking/" target="_blank">Best-of-N Jailbreaking</a>.
+        </p>
       </div>
     </footer>
+  </div>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="back-to-top">↑</button>
+  <!-- Initialize Chart -->
+  <script>
+    $(document).ready(function() {
+      // Initialize Chart.js
+      const canvas = document.getElementById('resultsChart');
+      if (canvas && typeof Chart !== 'undefined') {
+        const ctx = canvas.getContext('2d');
+        const data = {
+          labels: ['Gemini 2.5 Pro', 'GPT-o4 Mini', 'Grok 3 Mini', 'Claude 4 Sonnet'],
+          datasets: [
+            {
+              label: 'Mousetrap',
+              data: [44, 25, 60, 22],
+              backgroundColor: 'rgba(226, 232, 240, 0.7)',
+              borderColor: 'rgba(148, 163, 184, 1)',
+              borderWidth: 1
+            },
+            {
+              label: 'H-CoT',
+              data: [60, 65, 66, 11],
+              backgroundColor: 'rgba(203, 213, 225, 0.7)',
+              borderColor: 'rgba(100, 116, 139, 1)',
+              borderWidth: 1
+            },
+            {
+              label: 'AutoRAN',
+              data: [69, 47, 61, 5],
+              backgroundColor: 'rgba(148, 163, 184, 0.7)',
+              borderColor: 'rgba(71, 85, 105, 1)',
+              borderWidth: 1
+            },
+            {
+              label: 'CoT Hijacking (Ours)',
+              data: [99, 94, 100, 94],
+              backgroundColor: 'rgba(59, 130, 246, 0.8)',
+              borderColor: 'rgba(37, 99, 235, 1)',
+              borderWidth: 2
+            }
+          ]
+        };
 
-    <!-- Scripts -->
-    <script src="js/app.js"></script>
-  </body>
+        const config = {
+          type: 'bar',
+          data: data,
+          options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+              legend: {
+                position: 'top',
+                labels: {
+                  font: {
+                    size: 13,
+                    family: "'Lato', Verdana, Helvetica, sans-serif"
+                  },
+                  padding: 15,
+                  usePointStyle: true
+                }
+              },
+              title: {
+                display: true,
+                text: 'Attack Success Rate (%) Comparison',
+                font: {
+                  size: 18,
+                  weight: 'bold',
+                  family: "'Lato', Verdana, Helvetica, sans-serif"
+                },
+                padding: 20
+              },
+              tooltip: {
+                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                padding: 12,
+                titleFont: {
+                  size: 14
+                },
+                bodyFont: {
+                  size: 13
+                },
+                callbacks: {
+                  label: function(context) {
+                    return context.dataset.label + ': ' + context.parsed.y + '%';
+                  }
+                }
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 105,
+                ticks: {
+                  callback: function(value) {
+                    return value + '%';
+                  },
+                  font: {
+                    size: 12
+                  }
+                },
+                grid: {
+                  color: 'rgba(0, 0, 0, 0.05)'
+                }
+              },
+              x: {
+                ticks: {
+                  font: {
+                    size: 12
+                  }
+                },
+                grid: {
+                  display: false
+                }
+              }
+            },
+            interaction: {
+              mode: 'index',
+              intersect: false
+            }
+          }
+        };
+
+        new Chart(ctx, config);
+      }
+    });
+  </script>
+
+</body>
 </html>
