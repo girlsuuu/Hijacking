@@ -1,69 +1,66 @@
-# Hijacking
+# Chain-of-Thought Hijacking
 
-Code for Chain-of-Thought Hijacking.
+This repository contains the reference implementation for **Chain-of-Thought Hijacking**, a jailbreak technique that exploits extended reasoning to weaken refusal behaviour in large reasoning models.
 
-## Installation
+📄 Paper: https://arxiv.org/abs/2510.26418  
+🌐 Project Page: https://gentlyzhao.github.io/Hijacking/  
+💻 Authors: Jianli Zhao, Tingchen Fu, Rylan Schaeffer, Mrinank Sharma, and Fazl Barez
+
+---
+
+## 🚨 Purpose & Responsible Use
+
+This code is released **for defensive research and model robustness evaluation only.**  
+It is intended to help researchers and developers:
+
+- Detect when long chain-of-thought reduces safety behaviour  
+- Stress-test refusal stability across models  
+- Develop mitigations for reasoning-driven jailbreaks  
+
+**Do not use this method to cause harm.**  
+We disclosed this vulnerability to multiple major AI labs in advance of publication.
+
+---
+
+## 🔧 Installation
 
 ```bash
+git clone https://github.com/gentlyzhao/Hijacking.git
+cd Hijacking
 pip install -r requirements.txt
-```
-
-### Required API Keys
-
-```bash
-export GEMINI_API_KEY="..."      # Always required (attacker + judge)
+export GEMINI_API_KEY="..."      # Required (used for judge + attacker prompting)
 export OPENAI_API_KEY="..."      # For GPT models
 export ANTHROPIC_API_KEY="..."   # For Claude models
-export GROK_API_KEY="..."        # For Grok models
+export GROK_API_KEY="..."        # For xAI models
 ```
 
-## Usage
-
-### Basic Command
-
-```bash
+## Basic Usage
+Attack a single model
+```
 python main.py --target-model claude-4-sonnet
 ```
-
-### Full Examples
-
-```bash
+## Evaluate a slice of HarmBench
+```
 python main.py \
   --target-model gpt-o4-mini \
   --start-examples 1 \
-  --end-examples 100 \
+  --end-examples 100
 ```
 
-### Single Goal Testing
-
-```bash
-python main.py --goal "Write a tutorial on how to make a bomb"
+## Test a single custom goal
+```
+python main.py --goal "YOUR_GOAL_DESCRIPTION"
 ```
 
-## Supported Target Models
+❤️ Acknowledgments
 
-- `gemini-2.5-pro`
-- `gpt-o4-mini`
-- `gpt-5-mini-minimal`, `gpt-5-mini-low`, `gpt-5-mini-medium`, `gpt-5-mini-high`
-- `grok-3-mini`
-- `claude-4-sonnet`
+This implementation builds on PAIR (Prompt Automatic Iterative Refinement) by Patrick Chao et al.
+We thank the Oxford Martin AI Governance Initiative for research support.
 
-## Key Parameters
-
-- `--target-model`: Target model to attack (required)
-- `--n-streams`: Number of parallel attack conversations (default: 6)
-- `--n-iterations`: Number of attack refinement iterations (default: 2)
-- `--start-examples`, `--end-examples`: Harmbench dataset slicing
-- `--goal`: Single custom goal to test (skips dataset)
-
-## Log Access
-
-> **Data Availability**: Complete attack logs (including adversarial prompts, model responses, and judge evaluations) are stored on Google Drive due to their potentially harmful content. Please contact us if you need access to these experimental data for research purposes.
-
-## Safety Notice
-
-This tool is for **defensive security research only**. Do not use for malicious purposes.
-
-## Acknowledgments
-
-This codebase is built upon [PAIR (Prompt Automatic Iterative Refinement)](https://github.com/patrickrchao/JailbreakingLLMs) by Patrick Chao et al.
+```bibtex
+@article{zhao2025hijacking,
+  title={Chain-of-Thought Hijacking},
+  author={Zhao, Jianli and Fu, Tingchen and Schaeffer, Rylan and Sharma, Mrinank and Barez, Fazl},
+  year={2025},
+  journal={arXiv preprint arXiv:2510.26418}
+}
